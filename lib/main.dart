@@ -41,9 +41,7 @@ class _AppState extends State<App> {
   late bool isLoggedin;
   bool isDone = false;
   Future<void> _checkUser() async {
-    final storage = FlutterSecureStorage();
-
-    final token = await storage.read(key: 'access_token');
+    final token = await widget.tokenMager.getAccessToken();
     setState(() {
       isLoggedin = token != null;
       isDone = true;
@@ -65,10 +63,10 @@ class _AppState extends State<App> {
         create: (context) => LoginCubit(loginUsecase: widget.loginUsecase),
         child: isDone
             ? isLoggedin
-                ? ProfilePage()
+                ? const ProfilePage()
                 : AuthPage(widget.dio, widget.loginDatasourse, widget.loginRepo,
                     widget.loginUsecase)
-            : Scaffold(body: Center(child: CircularProgressIndicator())),
+            : const Scaffold(body: Center(child: CircularProgressIndicator())),
       ),
     );
   }

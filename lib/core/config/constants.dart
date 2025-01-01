@@ -4,4 +4,6 @@ const Map<String, String> endpoints = {
   'sign-in': '/auth/sign-in',
   'logout': '/auth/logout',
   'test': '/protected',
+  'profile': '/profile',
+  'users': '/users/3e4b4845-887d-4fb5-9d12-8a60f1b22c36'
 };

@@ -14,10 +14,8 @@ class LoginRepoImpl implements LoginRepo {
 
       await tokenManager?.saveTokens(
           tokens['access_token']!, tokens['refresh_token']!);
-      final token = await tokenManager?.getAccessToken();
-      print(token);
     } catch (e) {
-      throw Exception('Error: $e');
+      throw Exception('auth_repo Error: $e');
     }
   }
 }

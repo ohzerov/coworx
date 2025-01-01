@@ -16,8 +16,10 @@ class LoginDatasourse {
         "password": password,
       },
     );
+
     if (response.statusCode == 200) {
-      final Map<String, dynamic> tokens = jsonDecode(response.data);
+      final Map<String, dynamic> tokens = response.data;
+
       return {
         "access_token": tokens["access_token"]!,
         "refresh_token": tokens["refresh_token"]!,

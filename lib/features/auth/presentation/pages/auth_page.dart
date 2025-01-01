@@ -36,6 +36,16 @@ class _AuthPageState extends State<AuthPage> {
   }
 
   @override
+  void didUpdateWidget(oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if ((widget.emailController != null) && (oldWidget.emailController != null))
+      widget.emailController.text = oldWidget.emailController.text;
+    if ((widget.passwordController != null) &&
+        (oldWidget.passwordController != null))
+      widget.passwordController.text = oldWidget.passwordController.text;
+  }
+
+  @override
   Widget build(BuildContext context) {
     double topPaddingHeight = ((SizeConfig.height(120) -
                 (MediaQuery.of(context).viewInsets.bottom / 4)) >
@@ -51,7 +61,7 @@ class _AuthPageState extends State<AuthPage> {
           if (state is LoginSuccessState)
             {
               Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(builder: (context) => ProfilePage()))
+                  MaterialPageRoute(builder: (context) => const ProfilePage()))
             }
           else if (state is LoginErrorState)
             {
@@ -98,6 +108,9 @@ class _AuthPageState extends State<AuthPage> {
 
                   TextField(
                     controller: widget.emailController,
+                    onChanged: (value) {
+                      print(value);
+                    },
                     decoration: InputDecoration(
                       label: Text("Your email"),
                       border: OutlineInputBorder(
@@ -110,6 +123,9 @@ class _AuthPageState extends State<AuthPage> {
                   ),
 
                   TextField(
+                    onChanged: (value) {
+                      print(value);
+                    },
                     controller: widget.passwordController,
                     obscuringCharacter: '\u2620',
                     obscureText: true,
@@ -131,7 +147,6 @@ class _AuthPageState extends State<AuthPage> {
                                 context.read<LoginCubit>().loginWithEmail(
                                     widget.emailController.text.trim(),
                                     widget.passwordController.text);
-                                print("go");
                               }
                             : null,
                         buttonText: state is LoginLoadingState

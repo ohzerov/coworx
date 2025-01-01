@@ -39,6 +39,22 @@ class _RegistrationPageState extends State<RegistrationPage> {
   }
 
   @override
+  void didUpdateWidget(
+      oldWidget) // Override it and copy the old ones over if not null
+  {
+    super.didUpdateWidget(oldWidget);
+    if ((widget.emailController != null) && (oldWidget.emailController != null))
+      widget.emailController.text = oldWidget.emailController.text;
+    if ((widget.passwordController != null) &&
+        (oldWidget.passwordController != null))
+      widget.passwordController.text = oldWidget.passwordController.text;
+    if ((widget.checkPasswordController != null) &&
+        (oldWidget.checkPasswordController != null))
+      widget.checkPasswordController.text =
+          oldWidget.checkPasswordController.text;
+  }
+
+  @override
   Widget build(BuildContext context) {
     double topPaddingHeight = ((SizeConfig.height(120) -
                 (MediaQuery.of(context).viewInsets.bottom / 4)) >
